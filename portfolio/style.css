@@ -216,7 +216,7 @@ button{
         width: auto;
         transform: translateY(-50%);
         flex-direction: column;
-        aligh-items: flex-end;
+        align-items: flex-end;
         gap:1rem;
     }
 
