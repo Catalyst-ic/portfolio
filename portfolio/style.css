@@ -125,7 +125,7 @@ button{
     font-weight: 700;
     letter-spacing: 0.1em;
     color: rgba(255, 255, 255, 0.8);
-    transition: color 0.3s, tranform 0.3s;
+    transition: color 0.3s, transform 0.3s;
     animation: enter 0.5s calc(var(--i) * 0.1s + 0.5s) backwards;
 }
 
@@ -148,7 +148,7 @@ button{
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    text-transform: uppsercase;
+    text-transform: uppercase;
     background: linear-gradient(var(--c), var(--c)) no-repeat left / 0 100%;
     transition: 0.3s;
     animation: enter 0.5s 1s backwards;
@@ -159,7 +159,7 @@ button{
     color: #000;
     transform: scale(1.05);
 }
-.start.h1{
+.start.hl{
     --c: #facc15; transform: scale(1.1); box-shadow: 0 0 30px rgba(250, 204, 21, 0.6);
 }
 
@@ -185,7 +185,7 @@ button{
     transform: translateY(-5px);
 }
 
-.socials .h1 a{
+.socials .hl a{
    color: #facc15;
     transform: scale(1.25); 
     filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.8));
@@ -204,7 +204,7 @@ button{
 @media (min-width: 768px){
     .landing { padding: 3rem;}
     .lanidng h1 {font-size: 4.5rem;}
-    .substitle {font-size: 1rem;}
+    .subtitle {font-size: 1rem;}
     .bars {height: 1.5rem;}
     .bars span{ width: 4px;}
 
@@ -231,7 +231,7 @@ button{
 
     .landing nav a:hover {
         color: #fff;
-        transform: translateX(-10px) sclae(1.1);
+        transform: translateX(-10px) scale(1.1);
     }
 
     .start {
