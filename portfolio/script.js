@@ -1,19 +1,19 @@
 const app= document.getElementById('app');
 const startBtn = document.getElementById('startBtn');
-const socials = document.getElementById('.socials');
+const socials = document.querySelector('.socials');
 
 lucide.createIcons();
 
 function flash(el){
-    el.classList.add('h1');
-    setTimeout(() => el.classList.remove('h1'), 2000);
+    el.classList.add('hl');
+    setTimeout(() => el.classList.remove('hl'), 2000);
 }
 
 startBtn.onclick = () => app.classList.add('started');
 
 document.querySelectorAll('[data-action]').forEach((link) =>{
     link.onclick = (e) => {
-        e.prevenDefault();
+        e.preventDefault();
         if (link.dataset.action === 'about') flash(startBtn);
         if (link.dataset.action === 'contact') flash(socials);
         if (link.dataset.action === 'work') openModal();
@@ -21,7 +21,7 @@ document.querySelectorAll('[data-action]').forEach((link) =>{
 });
 
 const modal = document.getElementById('modal');
-const list = document.getElementById('list');
+const list = document.getElementById('projects');
 
 const projects = [
     { 

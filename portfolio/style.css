@@ -185,7 +185,7 @@ button{
     transform: translateY(-5px);
 }
 
-.socials .hl a{
+.socials.hl a{
    color: #facc15;
     transform: scale(1.25); 
     filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.8));
@@ -203,7 +203,7 @@ button{
 
 @media (min-width: 768px){
     .landing { padding: 3rem;}
-    .lanidng h1 {font-size: 4.5rem;}
+    .landing h1 {font-size: 4.5rem;}
     .subtitle {font-size: 1rem;}
     .bars {height: 1.5rem;}
     .bars span{ width: 4px;}
@@ -271,7 +271,7 @@ button{
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-.modal .open{
+.modal.open{
     opacity: 1;
     visibility: visible;
 }
@@ -292,7 +292,7 @@ button{
     transition: transform 0.3s;
 }
 
-.modal .open .panel{
+.modal.open .panel{
     transform: none;
 }
 
@@ -461,7 +461,7 @@ button{
     .modal{ padding: 2rem;}
     .panel-head{padding:2rem;}
     .panel-head h2{ font-size: 3rem;}
-    .panel-head {padding: 2rem 2rem 7rem};
+    .panel-head {padding: 2rem 2rem 7rem; gap: 6rem;}
     .card {flex-direction: row; gap: 4rem;}
     .card:nth-child(even) { flex-direction: row-reverse;}
     .card > div{width: 50%;}
