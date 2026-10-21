@@ -311,8 +311,8 @@ button{
 }
 
 .panel-head p{
-    margin-top: 0.25rem;
-    font: 0.875rem ui-monospace, monospace;
+    font-family: ui-monospace, monospace;
+    font-size: 0.875rem;
     letter-spacing: 0.1em;
     color: #a1a1aa;
     text-transform: uppercase;
@@ -466,4 +466,263 @@ button{
     .card:nth-child(even) { flex-direction: row-reverse;}
     .card > div{width: 50%;}
     .info h3{font-size: 3.75rem;}
+}
+
+@keyframes pulse {50% { opacity: 0.5}}
+@keyframes bounce { 50% {transform: translateY(-25%);}}
+@keyframes fill { from {width: 0;}}
+
+.story{
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    overflow-y: auto;
+    background: #000;
+    color: #4ade80;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s, visibility 1.5s;
+}
+
+.story.open{
+    opacity: 1;
+    visibility: visible;
+}
+
+#stars {
+    position: fixed;
+    inset: 0;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.2), transparent, rgba(0, 0, 0, 0.2)),
+        linear-gradient(transparent 50%, rgba(0, 0, 0, 0.2) 50%);
+    background-size: 100% 100%, 100% 4px;
+}
+
+.level {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 50;
+    color: #22c55e;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.level small { display: block; font-size: 0.75rem; opacity: 0.7; }
+.level b { display: flex; gap: 0.5rem; font-size: 1.25rem; }
+.level i { font-style: normal; animation: pulse 2s infinite; }
+
+.meter {
+    width: 6rem;
+    height: 4px;
+    margin-top: 0.25rem;
+    background: #14532d;
+    overflow: hidden;
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+    background: #22c55e;
+    animation: fill 0.5s;
+}
+
+.content { position: relative; z-index: 10; }
+
+.frame {
+    position: relative;
+    min-height: 100dvh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    display: grid;
+    place-items: center;
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 1.5rem;
+    border: 4px solid #22c55e;
+    border-radius: 50%;
+    background: rgba(20, 83, 45, 0.2);
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+    animation: pulse 3s infinite;
+}
+
+.logo svg { width: 48px; height: 48px; }
+
+.story h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+.tagline {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: rgba(74, 222, 128, 0.8);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.hint {
+    --y: 0;
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #22c55e;
+    animation: enter 1s 3s backwards, bounce 1s infinite;
+}
+
+.hint small {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.hint svg { width: 24px; height: 24px; }
+
+.retro {
+    position: relative;
+    width: 100%;
+    max-width: 48rem;
+    padding: 1rem;
+    text-align: left;
+    border: 2px solid rgba(34, 197, 94, 0.5);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    backdrop-filter: blur(12px);
+    background:
+        linear-gradient(#22c55e, #22c55e) top left,
+        linear-gradient(#22c55e, #22c55e) top right,
+        linear-gradient(#22c55e, #22c55e) bottom left,
+        linear-gradient(#22c55e, #22c55e) bottom right,
+        rgba(0, 0, 0, 0.8);
+    background-size: 8px 8px;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: perspective(1000px) rotateX(45deg) scale(0.5);
+    transition: 1s;
+}
+
+.frame.show .retro { opacity: 1; transform: none; }
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.3);
+}
+
+.head svg {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background: rgba(20, 83, 45, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.head h2 { font-size: 1.875rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.text {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    letter-spacing: 0.025em;
+    color: rgba(220, 252, 231, 0.9);
+}
+
+.text b { font-weight: 400; color: #fff; }
+.text li { display: flex; gap: 0.75rem; }
+.text li::before { content: "►"; margin-top: 0.25rem; color: #22c55e; }
+
+.quote {
+    padding-left: 1rem;
+    border-left: 4px solid #22c55e;
+    font-style: italic;
+    color: #86efac;
+}
+
+.boxes { gap: 1.5rem; }
+.drives { text-align: center; }
+
+.box {
+    padding: 1rem;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 0.25rem;
+    background: rgba(20, 83, 45, 0.2);
+    transition: background 0.3s;
+}
+
+.box:hover { background: rgba(20, 83, 45, 0.4); }
+.box h3 { font-size: 1.5rem; color: #fff; }
+.box p { color: #4ade80; }
+.box small { display: block; margin-top: 0.5rem; font-size: 0.875rem; opacity: 0.7; }
+
+.end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 6rem 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    color: #16a34a;
+}
+
+.exit {
+    padding: 0.75rem 2rem;
+    border: 1px solid #22c55e;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    color: #4ade80;
+    background: linear-gradient(#22c55e, #22c55e) no-repeat left / 0 100%, rgba(20, 83, 45, 0.2);
+    transition: 0.3s;
+}
+
+.exit:hover { background-size: 100% 100%; color: #000; }
+
+@media (min-width: 768px) {
+    .level { top: 2rem; left: 2rem; }
+    .level small { font-size: 0.875rem; }
+    .level b { font-size: 1.875rem; }
+    .meter { width: 8rem; }
+    .frame { padding: 4rem; }
+    .logo { width: 10rem; height: 10rem; margin-bottom: 2rem; }
+    .logo svg { width: 64px; height: 64px; }
+    .story h1 { font-size: 8rem; }
+    .tagline { font-size: 2.25rem; }
+    .hint small { font-size: 0.875rem; }
+    .hint svg { width: 32px; height: 32px; }
+    .retro { padding: 2.5rem; }
+    .head { gap: 1rem; margin-bottom: 1.5rem; }
+    .head svg { width: 48px; height: 48px; }
+    .head h2 { font-size: 3rem; }
+    .text { font-size: 1.5rem; }
+    .drives { grid-template-columns: 1fr 1fr; }
+    .exit { font-size: 1rem; }
 }

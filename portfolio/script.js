@@ -9,7 +9,10 @@ function flash(el){
     setTimeout(() => el.classList.remove('hl'), 2000);
 }
 
-startBtn.onclick = () => app.classList.add('started');
+startBtn.onclick = () => {
+    app.classList.add('started');
+    openStory();
+};
 
 document.querySelectorAll('[data-action]').forEach((link) =>{
     link.onclick = (e) => {
@@ -34,6 +37,7 @@ const projects = [
     },
     {
         title: "BLACK KITE",
+        smth: " ",
         subtitle: "Civic Innovation | Godawari Municipality",
         description: "An automated waste cleaning system focused on practical civic application and sustainability. Designed to solve real-world environmental challenges through robotics.",
         image: "",
@@ -83,3 +87,93 @@ function closeModal() {
 }
 
 document.getElementById('closeBtn').onclick = closeModal;
+
+const story = document.getElementById('story');
+const level = document.getElementById('level');
+const meter = document.getElementById('meter');
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+function setLevel(name) {
+    level.textContent = name;
+    meter.innerHTML = '<span></span>';
+}
+
+function type(el) {
+    const text = el.dataset.type;
+    let i = 0;
+    el.textContent = '';
+    setTimeout(() => {
+        const timer = setInterval(() => {
+            el.textContent += text[i++];
+            if (i >= text.length) clearInterval(timer);
+        }, el.dataset.speed);
+    }, el.dataset.delay || 0);
+}
+
+function openStory() {
+    story.classList.add('open');
+    story.scrollTop = 0;
+    lastY = 0;
+    document.querySelectorAll('[data-type]').forEach(type);
+}
+
+function closeStory() {
+    story.classList.remove('open');
+    app.classList.remove('started');
+}
+
+document.getElementById('exitBtn').onclick = closeStory;
+
+const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+        e.target.classList.toggle('show', e.isIntersecting);
+        if (e.isIntersecting) setLevel(e.target.dataset.level);
+    });
+}, { root: story, threshold: 0.3 });
+
+document.querySelectorAll('.frame').forEach((f) => spy.observe(f));
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+window.onresize = () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+};
+
+const stars = Array.from({ length: 400 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    z: Math.random() * 1.5 + 0.5,
+    size: Math.random() * 2,
+    color: `hsl(${Math.random() * 60 + 100}, 100%, 80%)`
+}));
+
+let speed = 0;
+let lastY = 0;
+
+function draw() {
+    requestAnimationFrame(draw);
+    if (!story.classList.contains('open')) return;
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    speed += ((story.scrollTop - lastY) * 60 - speed) * 0.2;
+    lastY = story.scrollTop;
+
+    stars.forEach((s) => {
+        s.y += (0.5 - speed * 0.05) * s.z;
+        if (s.y > canvas.height) s.y = 0;
+        if (s.y < 0) s.y = canvas.height;
+
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = Math.min(1, s.z);
+        ctx.beginPath();
+        ctx.ellipse(s.x, s.y, s.size, s.size * Math.max(1, Math.abs(speed * 0.1) * s.z), 0, 0, Math.PI * 2);
+        ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+}
+
+draw();
