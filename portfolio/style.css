@@ -726,3 +726,8 @@ button{
     .drives { grid-template-columns: 1fr 1fr; }
     .exit { font-size: 1rem; }
 }
+
+#scene{
+    position: absolute;
+    inset: 0;
+}

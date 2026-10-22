@@ -11,7 +11,7 @@ function flash(el){
 
 startBtn.onclick = () => {
     app.classList.add('started');
-    openStory();
+    document.dispatchEvent(new Event('enter'));
 };
 
 document.querySelectorAll('[data-action]').forEach((link) =>{
@@ -121,6 +121,7 @@ function openStory() {
 function closeStory() {
     story.classList.remove('open');
     app.classList.remove('started');
+    document.dispatchEvent(new Event('leave'));
 }
 
 document.getElementById('exitBtn').onclick = closeStory;
@@ -177,3 +178,5 @@ function draw() {
 }
 
 draw();
+
+document.addEventListener('complete', openStory);

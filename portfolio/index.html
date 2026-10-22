@@ -10,6 +10,7 @@
 <body>
     <div id="app">
         <div class="overlay"></div>
+        <canvas id="scene"></canvas>
     <div class="landing">
         <header>
             <div>
@@ -132,5 +133,7 @@
     </div>
     <script src="https://unpkg.com/lucide@0.546.0"></script>
     <script src="script.js"></script>
+    <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.183.1/build/three.module.js" } }</script>
+    <script type="module" src="scene.js"></script>
 </body>
 </html>
