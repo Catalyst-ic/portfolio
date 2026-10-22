@@ -112,10 +112,34 @@ add(temple, cone(3, 1.2), roof, 0, 4.8, 0).rotation.y = Math.PI / 4;
 add(temple, new THREE.CylinderGeometry(0.05, 0.2, 0.6), gold, 0, 5.6, 0);
 add(temple, new THREE.SphereGeometry(0.15), gold, 0, 6, 0);
 
+function lion(x, ry) {
+    const g = new THREE.Group();
+    g.position.set(x, 0.6, 1.5);
+    g.rotation.y = ry;
+    add(g, box(0.8, 0.6, 1), stone, 0, -0.2, 0);
+    add(g, box(0.5, 0.6, 0.7), stone, 0, 0.4, -0.1);
+    add(g, box(0.4, 0.5, 0.5), stone, 0, 0.9, 0.2);
+    add(g, box(0.15, 0.6, 0.15), stone, -0.15, 0.3, 0.3);
+    add(g, box(0.15, 0.6, 0.15), stone, 0.15, 0.3, 0.3);
+    temple.add(g);
+}
+
+lion(-2.5, 0.3);
+lion(2.5, -0.3);
+
 const mouse = { x: 0, y: 0 };
 addEventListener('mousemove', (e) => {
     mouse.x = (e.clientX / innerWidth - 0.5) * 2;
     mouse.y = (e.clientY / innerHeight - 0.5) * 2;
+});
+
+let touchX = 0;
+addEventListener('touchstart', (e) => touchX = e.touches[0].clientX);
+addEventListener('touchmove', (e) => {
+    if (mode !== 'idle') return;
+    const x = e.touches[0].clientX;
+    rig.rotation.y += (x - touchX) * 0.005;
+    touchX = x;
 });
 
 let mode = 'idle';
@@ -123,9 +147,37 @@ let t = 0;
 let open = false;
 let last = 0;
 
+const ambience = new Audio('assets/ambience.mp3');
+ambience.loop = true;
+ambience.volume = 0.3;
+
+const unlockEvents = ['pointerdown', 'touchend', 'keydown', 'click'];
+
+function startAmbience() {
+    if (!ambience.paused) return;
+    ambience.play().then(() => {
+        unlockEvents.forEach((ev) => removeEventListener(ev, startAmbience));
+    }).catch(() => {});
+}
+
+// try immediately on page load; browsers may block this until the user interacts
+startAmbience();
+// fallback: start on the very first interaction (click, tap, key press)
+unlockEvents.forEach((ev) => addEventListener(ev, startAmbience));
+
+const creak = new Audio('assets/creak.mp3');
+creak.volume = 0.6;
+
+function setOpen(value) {
+    if (open === value) return;
+    open = value;
+    creak.play();
+}
+
 document.addEventListener('enter', () => {
     mode = 'enter';
     t = 0;
+    startAmbience();
 });
 
 document.addEventListener('leave', () => {
@@ -154,8 +206,8 @@ renderer.setAnimationLoop((now) => {
 
     if (mode === 'enter' || mode === 'leave') {
         t += mode === 'enter' ? dt : -dt * 2.5;
-        if (mode === 'enter' && t > 3) open = true;
-        if (mode === 'leave' && t < 3.5) open = false;
+        if (mode === 'enter' && t > 3) setOpen(true);
+        if (mode === 'leave' && t < 3.5) setOpen(false);
 
         rig.rotation.x = lerp(rig.rotation.x, 0, dt * 5);
         rig.rotation.y = lerp(rig.rotation.y, 0, dt * 5);
