@@ -173,7 +173,7 @@ function setOpen(value) {
     open = value;
     creak.play();
 }
-
+ 
 document.addEventListener('enter', () => {
     mode = 'enter';
     t = 0;
@@ -232,3 +232,5 @@ renderer.setAnimationLoop((now) => {
 
     if (mode !== 'done') renderer.render(scene, camera);
 });
+
+console.log
