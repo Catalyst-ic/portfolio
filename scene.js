@@ -1,7 +1,17 @@
 import * as THREE from 'three';
 
 const { lerp } = THREE.MathUtils;
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('scene') });
+
+let renderer;
+try {
+    renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('scene') });
+} catch {
+    document.getElementById('nogl').hidden = false;
+    document.getElementById('loading').classList.add('hide');
+    document.addEventListener('enter', () => document.dispatchEvent(new Event('complete')));
+    throw new Error('WebGL is not available');
+}
+
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 const scene = new THREE.Scene();
@@ -34,7 +44,8 @@ glow.position.set(0, 0, 1);
 
 scene.add(sun, purple, front, glow);
 
-const loader = new THREE.TextureLoader();
+const manager = new THREE.LoadingManager(() => document.getElementById('loading').classList.add('hide'));
+const loader = new THREE.TextureLoader(manager);
 
 function texture(url, rx = 1, ry = 1) {
     const t = loader.load(url);
@@ -233,4 +244,4 @@ renderer.setAnimationLoop((now) => {
     if (mode !== 'done') renderer.render(scene, camera);
 });
 
-console.log
+setTimeout(() => document.getElementById('loading').classList.add('hide'), 8000);

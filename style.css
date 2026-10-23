@@ -17,6 +17,7 @@ a{
 }
 
 button{
+    content: "Hello, hi, could you give recommendations for more things to be added to the website to make it more interesting";
     font: inherit;
     color: inherit;
     background: none;
@@ -730,4 +731,36 @@ button{
 #scene{
     position: absolute;
     inset: 0;
+}
+
+#loading{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: #000;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    transition: opacity 0.8s, visibility 0.8s;
+}
+
+#loading span{
+    animation: pulse 1s infinite;
+}
+
+#loading.hide{
+    opacity: 0;
+    visibility: hidden;
+}
+
+#nogl{
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    padding: 0 1rem;
+    text-align: center;
+    color: #facc15;
 }
