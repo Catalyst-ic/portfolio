@@ -736,23 +736,42 @@ let t = 0;
 let open = false;
 let last = 0;
 
-const ambience = new Audio('assets/ambience.mp3');
+const ambience = new Audio(new URL('assets/ambience.mp3', import.meta.url));
+ambience.preload = 'auto';
 ambience.loop = true;
 ambience.volume = 0.3;
 
-const creak = new Audio('assets/creak.mp3');
+const creak = new Audio(new URL('assets/creak.mp3', import.meta.url));
+creak.preload = 'auto';
 creak.volume = 0.6;
+
+function unlockAudio(audio) {
+    audio.muted = true;
+    const playback = audio.play();
+    if (playback) {
+        playback.then(() => {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.muted = false;
+        }).catch((error) => {
+            audio.muted = false;
+            console.error('Unable to unlock audio:', error);
+        });
+    }
+}
 
 function setOpen(value) {
     if (open === value) return;
     open = value;
-    creak.play();
+    creak.currentTime = 0;
+    creak.play().catch((error) => console.error('Unable to play door sound:', error));
 }
 
 document.addEventListener('enter', () => {
     mode = 'enter';
     t = 0;
-    ambience.play();
+    unlockAudio(creak);
+    ambience.play().catch((error) => console.error('Unable to play ambient sound:', error));
 });
 
 document.addEventListener('leave', () => {
