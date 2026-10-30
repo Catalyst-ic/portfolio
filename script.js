@@ -30,25 +30,24 @@ const projects = [
     { 
         title: "LALIGURAS",
         subtitle: "Silver Medalist | 28th SXC National",
-        description: "A mobile, all weather Nepali air defence system designed to intercept short-range rockets, missiles, and airtillery shells. Integrated with a real-time mobile app warning system.",
-        image: "",
+        description: "This was a mobile app and hardware project I and my team made for a national stem competion in St. Xavier's College Maitighar. Its a system for missile detection and warning system. This project was awarded silver medal.",
+        image: "assets/laliguras.png",
         tags: ["Defence", "Mobile App", "Hardware"],
         color: "#ef4444, #ea580c"
     },
     {
         title: "BLACK KITE",
-        smth: " ",
         subtitle: "Civic Innovation | Godawari Municipality",
-        description: "An automated waste cleaning system focused on practical civic application and sustainability. Designed to solve real-world environmental challenges through robotics.",
-        image: "",
+        description: "An automated waste cleaning system focused on practical civic application and sustainability. It was a arduino robot built for automatic waste cleaning",
+        image: "assets/kite.png",
         tags: ["Robotics", "Sustainability", "Civic Tech"],
         color: "#3b82f6, #0891b2"
     },
     {
         title: "CATECH",
-        subtitle: "Ongoing Research | Current Project",
-        description: "An active experimental hub for future-oriented innovation. Currently under development, focusing on cutting-edge technologies and research in various fields.",
-        image: "",
+        subtitle: "Pet Robot | Current Project",
+        description: "Its my flagship project. Its a pet robot assistant built for entertainment and maximum productivity. Its basically siri with wheels",
+        image: "assets/cattech.png",
         tags: ["R&D", "Innovation", "Future Tech"],
         color: "#a855f7, #db2777"
     }
