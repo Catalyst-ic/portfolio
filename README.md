@@ -30,14 +30,16 @@ JavaScript - Most of the 3d works was done with it (using a little bit of help w
 Simple technologies, combined to create something that feels uniquely mine.
 
 Wanna try it yourself?
+-Enter My Portfolio through https://shreedeshtiwari.vercel.app
 
-Enter My Portfolio through https://shreedeshtiwari.vercel.app
-
-Explore the experience and see how the different themes come together!
 
 The Idea Behind It
+-I wanted to create something that represents more than just my coding skills. Every element has a reason for being there, from the Minecraft nostalgia to the cosmic background and the Nepal inspired details.
 
-I wanted to create something that represents more than just my coding skills. Every element has a reason for being there, from the Minecraft nostalgia to the cosmic background and the Nepal inspired details.
+**AI Declaration:**
+I haven't used much AI in this project. Less than 15% of the code is ai.
+-I mostly used AI to solve the errors I was facing. Most of the errors in javascript while using three.js, I solved them using AI.
+-I used AI to assist me in how I can make some shapes in javascript.
 
 *This is the second readme I made really sorry if its bad*
 
