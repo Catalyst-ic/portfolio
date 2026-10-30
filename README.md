@@ -31,7 +31,7 @@ Simple technologies, combined to create something that feels uniquely mine.
 
 Wanna try it yourself?
 
-Enter My Portfolio through https://shreedesh.tiwari.vercel.app
+Enter My Portfolio through https://shreedeshtiwari.vercel.app
 
 Explore the experience and see how the different themes come together!
 
